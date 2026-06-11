@@ -31,8 +31,15 @@ export function ImportClaimsForm() {
               ? "border-emerald-300/20 bg-emerald-300/10 text-emerald-50"
               : "border-rose-300/20 bg-rose-300/10 text-rose-50",
           ].join(" ")}
-        >
-          {state.message}
+          >
+          <p className="font-medium">{state.message}</p>
+          {state.details?.length ? (
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-xs leading-5 text-inherit/90">
+              {state.details.map((detail) => (
+                <li key={detail}>{detail}</li>
+              ))}
+            </ul>
+          ) : null}
         </div>
       ) : null}
 

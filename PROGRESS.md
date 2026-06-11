@@ -31,6 +31,12 @@ Build a private insurance portfolio management system where each user:
   - an initial import service that parses and inserts CSV rows
 - The first database migration has been generated.
 - The initial CSV upload page and portfolio setup page are in place.
+- The import page now includes:
+  - strict header validation for the reviewer CSV format
+  - clear validation errors with details
+  - a downloadable CSV template for non-technical users
+- Row-level security policies have been prepared for the main user-owned tables.
+- The portfolio setup page now uses real dropdown/search controls and shows saved portfolios.
 
 ## What Is Not Done Yet
 
@@ -117,3 +123,5 @@ The first supported import format will be the provided `insurance_claims.csv` sa
 - 2026-06-11: Captured the four insurance group 39 reference pages for make/model mapping.
 - 2026-06-11: Implemented the first CSV parsing/mapping layer, Drizzle schema, and import service.
 - 2026-06-11: Generated the first Drizzle migration and added the CSV import and portfolio setup screens.
+- 2026-06-11: Added strict CSV header validation, friendly import errors, and a downloadable template.
+- 2026-06-11: Added row-level security SQL, authenticated user-context helpers, and saved portfolio listing.

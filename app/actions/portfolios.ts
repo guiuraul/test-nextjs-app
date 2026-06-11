@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import type { PortfolioActionState } from "@/app/actions/portfolios-state";
 import { initialPortfolioActionState } from "@/app/actions/portfolios-state";
-import { db } from "@/lib/db";
+import { withUserContext } from "@/lib/db";
 import { portfolios } from "@/lib/db/schema";
 import { getCurrentUser } from "@/lib/supabase/server";
 
@@ -64,11 +64,13 @@ export async function createPortfolioAction(
       : null,
   };
 
-  await db.insert(portfolios).values({
-    userId: user.id,
-    name: parsed.data.name,
-    description: "Saved insurance claim portfolio",
-    filters,
+  await withUserContext(user.id, async (tx) => {
+    await tx.insert(portfolios).values({
+      userId: user.id,
+      name: parsed.data.name,
+      description: "Saved insurance claim portfolio",
+      filters,
+    });
   });
 
   revalidatePath("/portfolio-setup");

@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import type { ImportActionState } from "@/app/actions/imports-state";
 import { initialImportActionState } from "@/app/actions/imports-state";
+import { InsuranceClaimsCsvValidationError } from "@/lib/csv/insurance-claims";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { processInsuranceClaimsCsv } from "@/lib/imports/process-insurance-claims";
 
@@ -58,6 +59,15 @@ export async function importInsuranceClaimsAction(
     };
   } catch (error) {
     console.error("[imports] import failed", error);
+
+    if (error instanceof InsuranceClaimsCsvValidationError) {
+      return {
+        status: "error",
+        message: error.message,
+        details: error.details,
+      };
+    }
+
     return {
       status: "error",
       message:

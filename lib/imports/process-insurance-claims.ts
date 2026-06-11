@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 
 import { parseInsuranceClaimsCsv, toInsuranceClaimImportInput } from "@/lib/csv/insurance-claims";
 import { mapInsuranceClaimToInsert } from "@/lib/db/mappers";
-import { db } from "@/lib/db";
+import { withUserContext } from "@/lib/db";
 import { claimRecords, imports } from "@/lib/db/schema";
 
 export type ProcessInsuranceClaimsResult = {
@@ -40,52 +40,56 @@ export async function processInsuranceClaimsCsv({
       : null,
   });
 
-  console.log("[imports] inserting import record");
-  const [importRecord] = await db
-    .insert(imports)
-    .values({
-      userId,
-      fileName,
-      status: "processing",
+  const result = await withUserContext(userId, async (tx) => {
+    console.log("[imports] inserting import record");
+    const [importRecord] = await tx
+      .insert(imports)
+      .values({
+        userId,
+        fileName,
+        status: "processing",
+        totalRows: rows.length,
+        processedRows: 0,
+        failedRows: 0,
+      })
+      .returning({ id: imports.id });
+
+    if (!importRecord) {
+      console.error("[imports] import record insert returned no row");
+      throw new Error("Unable to create import record.");
+    }
+
+    console.log("[imports] import record created", {
+      importId: importRecord.id,
+    });
+
+    const insertRows = rows.map((row) =>
+      mapInsuranceClaimToInsert(toInsuranceClaimImportInput(row), userId, importRecord.id)
+    );
+
+    if (insertRows.length > 0) {
+      console.log("[imports] inserting claim records", {
+        insertCount: insertRows.length,
+      });
+      await tx.insert(claimRecords).values(insertRows);
+    }
+
+    console.log("[imports] updating import status to completed");
+    await tx
+      .update(imports)
+      .set({
+        status: "completed",
+        processedRows: rows.length,
+        failedRows: 0,
+      })
+      .where(eq(imports.id, importRecord.id));
+
+    return {
+      importId: importRecord.id,
       totalRows: rows.length,
-      processedRows: 0,
-      failedRows: 0,
-    })
-    .returning({ id: imports.id });
-
-  if (!importRecord) {
-    console.error("[imports] import record insert returned no row");
-    throw new Error("Unable to create import record.");
-  }
-
-  console.log("[imports] import record created", {
-    importId: importRecord.id,
+      insertedRows: insertRows.length,
+    };
   });
 
-  const insertRows = rows.map((row) =>
-    mapInsuranceClaimToInsert(toInsuranceClaimImportInput(row), userId, importRecord.id)
-  );
-
-  if (insertRows.length > 0) {
-    console.log("[imports] inserting claim records", {
-      insertCount: insertRows.length,
-    });
-    await db.insert(claimRecords).values(insertRows);
-  }
-
-  console.log("[imports] updating import status to completed");
-  await db
-    .update(imports)
-    .set({
-      status: "completed",
-      processedRows: rows.length,
-      failedRows: 0,
-    })
-    .where(eq(imports.id, importRecord.id));
-
-  return {
-    importId: importRecord.id,
-    totalRows: rows.length,
-    insertedRows: insertRows.length,
-  };
+  return result;
 }
