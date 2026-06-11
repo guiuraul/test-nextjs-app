@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RiskAtlas
+
+Insurance portfolio management and analytics for private, user-isolated claim data.
+
+This project uses Next.js, Supabase, Tailwind CSS, shadcn-style UI primitives, and Drizzle ORM.
 
 ## Getting Started
 
