@@ -48,3 +48,6 @@ next-env.d.ts
 
 #drizzle
 /drizzle
+
+# npm lockfile is not used in this Bun-based repo
+package-lock.json
