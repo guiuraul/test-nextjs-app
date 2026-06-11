@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/test-nextjs-app.iml" filepath="$PROJECT_DIR$/.idea/test-nextjs-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/RiskAtlas.iml" filepath="$PROJECT_DIR$/.idea/RiskAtlas.iml" />
     </modules>
   </component>
 </project>

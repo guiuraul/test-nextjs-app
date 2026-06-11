@@ -35,7 +35,7 @@ export default async function Home() {
             </div>
             <div>
               <p className="text-sm font-semibold tracking-[0.22em] text-cyan-100 uppercase">
-                Portfolio Studio
+                RiskAtlas
               </p>
               <p className="text-xs text-slate-300">Insurance portfolio management</p>
             </div>

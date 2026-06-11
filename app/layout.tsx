@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio Insurance Studio",
+  title: "RiskAtlas",
   description: "Manage and analyze insurance portfolios with Supabase and Next.js.",
 };
 
