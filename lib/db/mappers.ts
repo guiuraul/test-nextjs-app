@@ -63,6 +63,6 @@ export function mapInsuranceClaimToInsert(
     autoModel: row.auto_model,
     autoYear: row.auto_year,
     fraudReported: toNullableBooleanFlag(row.fraud_reported),
-    isGroup39: row._c39 === "Y",
+    _c39: row._c39 === "Y",
   };
 }
