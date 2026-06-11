@@ -45,7 +45,8 @@ export default async function Home() {
             {user ? (
               <Link
                 href="/dashboard"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/15 px-5 text-sm font-medium text-cyan-50 transition hover:bg-cyan-300/20"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/15 px-5 text-sm font-medium transition hover:bg-cyan-300/20"
+                style={{ color: "#ffffff" }}
               >
                 Open dashboard
               </Link>
@@ -53,13 +54,15 @@ export default async function Home() {
               <>
                 <Link
                   href="/sign-in"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/8 px-5 text-sm font-medium text-slate-50 transition hover:bg-white/12"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/8 px-5 text-sm font-medium transition hover:bg-white/12"
+                  style={{ color: "#ffffff" }}
                 >
                   Sign in
                 </Link>
                 <Link
                   href="/sign-up"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/15 px-5 text-sm font-medium text-cyan-50 transition hover:bg-cyan-300/20"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/15 px-5 text-sm font-medium transition hover:bg-cyan-300/20"
+                  style={{ color: "#ffffff" }}
                 >
                   Create account
                 </Link>
@@ -86,14 +89,22 @@ export default async function Home() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link href="/sign-up">
-                <span className="inline-flex min-w-44 items-center justify-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/15 px-5 py-3 text-sm font-medium text-cyan-50 transition hover:bg-cyan-300/20">
+              <Link
+                href="/sign-up"
+                className="inline-flex min-w-44 items-center justify-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/15 px-5 py-3 text-sm font-medium transition hover:bg-cyan-300/20"
+                style={{ color: "#ffffff" }}
+              >
+                <span className="inline-flex items-center gap-2">
                   Start with signup
                   <ArrowRight className="h-4 w-4" />
                 </span>
               </Link>
-              <Link href="/sign-in">
-                <span className="inline-flex min-w-44 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/8 px-5 py-3 text-sm font-medium text-slate-50 transition hover:bg-white/12">
+              <Link
+                href="/sign-in"
+                className="inline-flex min-w-44 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/8 px-5 py-3 text-sm font-medium transition hover:bg-white/12"
+                style={{ color: "#ffffff" }}
+              >
+                <span className="inline-flex items-center gap-2">
                   I already have an account
                 </span>
               </Link>

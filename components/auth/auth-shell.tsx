@@ -37,7 +37,8 @@ export function AuthShell({
 
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition hover:bg-white/10"
+            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm transition hover:bg-white/10"
+            style={{ color: "#ffffff" }}
           >
             Back home
             <ArrowRight className="h-4 w-4" />
