@@ -51,7 +51,7 @@ export async function createPortfolioAction(
   });
 
   if (!parsed.success) {
-    const fieldErrors = parsed.error.flatten().fieldErrors;
+    const fieldErrors = z.flattenError(parsed.error).fieldErrors;
     return {
       status: "error",
       message: "Please fix the highlighted portfolio fields.",

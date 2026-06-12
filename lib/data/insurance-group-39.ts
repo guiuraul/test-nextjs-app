@@ -68,8 +68,3 @@ export function evaluateGroup39(autoMake: string, autoModel: string): Group39Mat
     matchKey,
   };
 }
-
-export function getGroup39Entries() {
-  return Array.from(normalizedGroup39Entries.values()).sort();
-}
-

@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { flattenError } from "zod";
 
 import {
   initialAuthState,
@@ -37,7 +38,7 @@ export async function signUpAction(
   });
 
   if (!parsed.success) {
-    const fieldErrors = parsed.error.flatten().fieldErrors;
+    const fieldErrors = flattenError(parsed.error).fieldErrors;
     return buildErrorState(
       "Please fix the highlighted fields and try again.",
       {
@@ -107,7 +108,7 @@ export async function signInAction(
   });
 
   if (!parsed.success) {
-    const fieldErrors = parsed.error.flatten().fieldErrors;
+    const fieldErrors = flattenError(parsed.error).fieldErrors;
     return buildErrorState(
       "Please fix the highlighted fields and try again.",
       {

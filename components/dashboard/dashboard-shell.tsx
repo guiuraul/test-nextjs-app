@@ -142,7 +142,7 @@ export function DashboardShell({
               <PortfolioSelector
                 portfolios={portfolios}
                 selectedPortfolioId={selectedPortfolio?.id ?? ""}
-                onSelectPortfolioId={setSelectedPortfolioId}
+                onSelectPortfolioIdAction={setSelectedPortfolioId}
               />
             </div>
           </section>

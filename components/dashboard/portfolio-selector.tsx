@@ -41,11 +41,11 @@ function getFilterChips(filters: PortfolioSummary["filters"]) {
 export function PortfolioSelector({
   portfolios,
   selectedPortfolioId,
-  onSelectPortfolioId,
+  onSelectPortfolioIdAction,
 }: {
   portfolios: PortfolioSummary[];
   selectedPortfolioId: string;
-  onSelectPortfolioId: (portfolioId: string) => void;
+  onSelectPortfolioIdAction: (portfolioId: string) => void;
 }) {
   const selectedPortfolio =
     portfolios.find((portfolio) => portfolio.id === selectedPortfolioId) ?? portfolios[0];
@@ -75,7 +75,7 @@ export function PortfolioSelector({
             id="portfolio-selector"
             value={selectedPortfolio.id}
             onChange={(event) => {
-              onSelectPortfolioId(event.target.value);
+              onSelectPortfolioIdAction(event.target.value);
             }}
             className="h-11 w-full appearance-none rounded-2xl border border-white/10 bg-slate-950/45 px-4 pr-10 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-300/40"
           >

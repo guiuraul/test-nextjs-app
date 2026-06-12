@@ -92,7 +92,4 @@ export const claimRecords = pgTable("claim_records", {
 
 export type ClaimRecordInsert = typeof claimRecords.$inferInsert;
 export type ClaimRecordSelect = typeof claimRecords.$inferSelect;
-export type PortfolioInsert = typeof portfolios.$inferInsert;
 export type PortfolioSelect = typeof portfolios.$inferSelect;
-export type ImportInsert = typeof imports.$inferInsert;
-export type ImportSelect = typeof imports.$inferSelect;
