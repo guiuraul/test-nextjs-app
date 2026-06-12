@@ -3,10 +3,10 @@ import { redirect } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 
 import { AppPageShell } from "@/components/app-page-shell";
+import { ImportClaimsForm } from "@/components/imports/import-claims-form";
 import { SignedInPill } from "@/components/auth/signed-in-pill";
 import { SignOutForm } from "@/components/auth/sign-out-form";
 import { getCurrentUser } from "@/lib/supabase/server";
-import { ImportClaimsForm } from "@/components/imports/import-claims-form";
 
 export default async function ImportsPage() {
   const user = await getCurrentUser();
@@ -38,26 +38,25 @@ export default async function ImportsPage() {
           <SignOutForm />
         </>
       }
-      children={
-        <div className="space-y-4">
-          <div className="rounded-2xl border border-cyan-300/15 bg-cyan-300/8 p-4">
-            <p className="text-sm font-medium text-white">Need a template?</p>
-            <p className="mt-2 text-sm leading-6 text-slate-300">
-              Download the reference CSV and fill it with the same columns the insurance agent will use.
-            </p>
-            <Link
-              href="/templates/insurance_claims_template.csv"
-              className="mt-4 inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/15 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-300/20"
-            >
-              Download template
-            </Link>
-          </div>
-
-          <ImportClaimsForm />
-        </div>
-      }
       footer="Built for private insurance portfolio analysis."
-    />
+    >
+      <div className="space-y-4">
+        <div className="rounded-2xl border border-cyan-300/15 bg-cyan-300/8 p-4">
+          <p className="text-sm font-medium text-white">Need a template?</p>
+          <p className="mt-2 text-sm leading-6 text-slate-300">
+            Download the reference CSV and fill it with the same columns the insurance agent will use.
+          </p>
+          <Link
+            href="/templates/insurance_claims_template.csv"
+            className="mt-4 inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/15 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-300/20"
+          >
+            Download template
+          </Link>
+        </div>
+
+        <ImportClaimsForm />
+      </div>
+    </AppPageShell>
   );
 }
 

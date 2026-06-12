@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BadgeDollarSign, ChartColumn, Files, ShieldCheck, Layers3 } from "lucide-react";
+import { BadgeDollarSign, ChartColumn, Files, Layers3 } from "lucide-react";
 import { useState } from "react";
 import type { ComponentType } from "react";
 
+import { BrandBadge } from "@/components/brand-badge";
 import { SignedInPill } from "@/components/auth/signed-in-pill";
 import { PortfolioAnalyticsPanel } from "@/components/dashboard/portfolio-analytics";
 import { PortfolioSelector, type PortfolioSummary } from "@/components/dashboard/portfolio-selector";
@@ -90,17 +91,7 @@ export function DashboardShell({
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(45,212,191,0.22),transparent_28%),radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.12),transparent_28%)]" />
       <div className="mx-auto flex min-h-[calc(100vh-3rem)] w-full max-w-7xl flex-col gap-8">
         <header className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
-          <Link href="/dashboard" className="group flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/30 bg-cyan-300/15 text-cyan-50 shadow-lg shadow-cyan-400/10">
-              <ShieldCheck className="h-5 w-5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold tracking-[0.24em] text-cyan-100 uppercase">
-                Risk Atlas
-              </p>
-              <p className="text-xs text-slate-300">Private insurance portfolio tracking</p>
-            </div>
-          </Link>
+          <BrandBadge href="/dashboard" />
 
           <div className="flex flex-wrap items-center gap-3">
             <SignedInPill email={signedInEmail} />

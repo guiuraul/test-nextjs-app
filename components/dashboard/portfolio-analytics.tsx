@@ -222,7 +222,26 @@ function ClaimMixChart({
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const colors = ["#67e8f9", "#34d399", "#fbbf24"];
-  let offset = 0;
+  const segments = items.reduce<
+    Array<{
+      item: { label: string; value: number };
+      dash: number;
+      offset: number;
+      color: string;
+    }>
+  >((acc, item, index) => {
+    const dash = (item.value / total) * circumference;
+    const offset = acc.length > 0 ? acc[acc.length - 1].offset + acc[acc.length - 1].dash : 0;
+
+    acc.push({
+      item,
+      dash,
+      offset,
+      color: colors[index % colors.length],
+    });
+
+    return acc;
+  }, []);
 
   return (
     <div className="rounded-[2rem] border border-white/10 bg-slate-950/35 p-5 shadow-xl shadow-black/10">
@@ -240,12 +259,7 @@ function ClaimMixChart({
             stroke="rgba(255,255,255,0.08)"
             strokeWidth={strokeWidth}
           />
-          {items.map((item, index) => {
-            const dash = (item.value / total) * circumference;
-            const color = colors[index % colors.length];
-            const currentOffset = offset;
-            offset += dash;
-
+          {segments.map(({ item, dash, offset, color }) => {
             return (
               <circle
                 key={item.label}
@@ -257,7 +271,7 @@ function ClaimMixChart({
                 strokeLinecap="round"
                 strokeWidth={strokeWidth}
                 strokeDasharray={`${dash} ${circumference - dash}`}
-                strokeDashoffset={-currentOffset}
+                strokeDashoffset={-offset}
                 transform={`rotate(-90 ${size / 2} ${size / 2})`}
               />
             );
