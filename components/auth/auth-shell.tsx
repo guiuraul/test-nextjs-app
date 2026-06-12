@@ -53,7 +53,6 @@ export function AuthShell({
             style={{ color: "#fff" }}
           >
             Back home
-            <ArrowRight className="h-4 w-4" />
           </Link>
         </header>
 

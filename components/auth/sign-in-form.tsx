@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import { useActionState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { signInAction } from "@/app/actions/auth";
 import { Button } from "@/components/ui/button";
@@ -21,14 +19,7 @@ function FieldError({ errors }: { errors?: string[] }) {
 }
 
 export function SignInForm() {
-  const router = useRouter();
   const [state, formAction, pending] = useActionState(signInAction, initialAuthState);
-
-  useEffect(() => {
-    if (state.status === "success") {
-      router.replace("/dashboard");
-    }
-  }, [router, state.status]);
 
   return (
     <Card className="w-full border-white/10 bg-slate-950/40 text-white shadow-none">
@@ -82,7 +73,7 @@ export function SignInForm() {
             className="w-full bg-sky-400/25 text-white shadow-sm shadow-sky-500/15 hover:bg-sky-400/30"
             disabled={pending}
           >
-            {pending ? "Signing in..." : "Sign in"}
+            {pending ? "Opening dashboard..." : "Sign in"}
           </Button>
         </form>
 

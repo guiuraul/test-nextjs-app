@@ -1,10 +1,12 @@
 import { redirect } from "next/navigation";
 
 import { DashboardShell } from "@/components/dashboard/dashboard-shell";
+import { DashboardFirstRun } from "@/components/dashboard/dashboard-first-run";
 import {
   getPortfolioAnalytics,
   type PortfolioFilterDefinition,
 } from "@/lib/portfolio/analytics";
+import { getUserWorkspaceStatus } from "@/lib/dashboard/queries";
 import { getUserPortfolios } from "@/lib/portfolio/queries";
 import { getCurrentUser } from "@/lib/supabase/server";
 
@@ -15,7 +17,18 @@ export default async function DashboardPage() {
     redirect("/sign-in");
   }
 
+  const workspaceStatus = await getUserWorkspaceStatus(user.id);
   const portfolios = await getUserPortfolios(user.id);
+
+  if (workspaceStatus.claimCount === 0) {
+    return (
+      <DashboardFirstRun
+        signedInEmail={user.email ?? null}
+        canGoToPortfolioSetup={workspaceStatus.importCount > 0}
+      />
+    );
+  }
+
   const serializedPortfolios = portfolios.map((portfolio) => ({
     id: portfolio.id,
     name: portfolio.name,
@@ -46,6 +59,7 @@ export default async function DashboardPage() {
       portfolios={serializedPortfolios}
       analyticsByPortfolioId={analyticsByPortfolioId}
       initialSelectedPortfolioId={initialSelectedPortfolioId}
+      signedInEmail={user.email ?? null}
     />
   );
 }

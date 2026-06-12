@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 
 import { SignOutForm } from "@/components/auth/sign-out-form";
+import { SignedInPill } from "@/components/auth/signed-in-pill";
 import { SiteFooter } from "@/components/site-footer";
 import { getCurrentUser } from "@/lib/supabase/server";
 
@@ -41,6 +42,7 @@ export default async function Home() {
                   Dashboard
                   <ArrowRight className="h-4 w-4" />
                 </Link>
+                <SignedInPill email={user.email ?? null} />
                 <SignOutForm className="px-4 text-sm" />
               </>
             ) : (

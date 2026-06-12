@@ -127,10 +127,7 @@ export async function signInAction(
     return buildErrorState(error.message);
   }
 
-  return {
-    status: "success",
-    message: "Signed in successfully.",
-  };
+  redirect("/dashboard");
 }
 
 export async function signOutAction() {
