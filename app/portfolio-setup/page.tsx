@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { AppPageShell } from "@/components/app-page-shell";
+import { SignedInPill } from "@/components/auth/signed-in-pill";
+import { SignOutForm } from "@/components/auth/sign-out-form";
 import { PortfolioList } from "@/components/portfolios/portfolio-list";
 import { PortfolioSetupForm } from "@/components/portfolios/portfolio-setup-form";
 import { getUserIncidentYears, getUserPortfolios } from "@/lib/portfolio/queries";
@@ -31,19 +33,14 @@ export default async function PortfolioSetupPage() {
         <>
           <Link
             href="/dashboard"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-cyan-200/35 bg-cyan-300/20 px-4 text-sm font-medium text-white shadow-sm shadow-cyan-500/10 transition hover:bg-cyan-300/25"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-cyan-200/35 bg-cyan-300/20 px-5 text-sm font-medium text-white shadow-sm shadow-cyan-500/10 transition hover:bg-cyan-300/25"
             style={{ color: "#fff" }}
           >
             Dashboard
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link
-            href="/imports"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white/8 bg-slate-900/55 px-4 text-sm font-medium text-white/90 transition hover:bg-slate-800/70 hover:text-white"
-            style={{ color: "#fff" }}
-          >
-            Imports
-          </Link>
+          <SignedInPill email={user.email ?? null} />
+          <SignOutForm />
         </>
       }
       footer="Built for private insurance portfolio analysis."

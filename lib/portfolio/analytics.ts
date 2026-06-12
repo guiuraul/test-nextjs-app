@@ -98,7 +98,7 @@ function buildMonthlyTotals(rows: Array<Record<string, unknown>>) {
 
   return Array.from(grouped.values())
     .sort((left, right) => left.sortValue - right.sortValue)
-    .map(({ sortValue, ...item }) => item);
+    .map(({ label, value }) => ({ label, value }));
 }
 
 function buildYearlyTotals(rows: Array<Record<string, unknown>>) {
@@ -132,7 +132,7 @@ function buildYearlyTotals(rows: Array<Record<string, unknown>>) {
 
   return Array.from(grouped.values())
     .sort((left, right) => left.sortValue.localeCompare(right.sortValue))
-    .map(({ sortValue, ...item }) => item);
+    .map(({ label, value }) => ({ label, value }));
 }
 
 export async function getPortfolioAnalytics(

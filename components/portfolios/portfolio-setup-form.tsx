@@ -166,15 +166,6 @@ export function PortfolioSetupForm({ incidentYears }: PortfolioSetupFormProps) {
           </div>
         </div>
       </div>
-
-      <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-        <p className="text-sm font-medium text-white">How this portfolio is saved</p>
-        <p className="mt-1 text-sm leading-6 text-slate-300">
-          The selected filters are stored as a private group so the dashboard can open the same
-          definition later.
-        </p>
-      </div>
-
       {state.message ? (
         <div
           className={[
